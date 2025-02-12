@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ФайлБери - Магазин цифровых товаров</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E2C3C9;
+            color: #31405F;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #C995A2;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-right: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .product-card {
+            background: #BFC6CC;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            background: #5A7FA2;
+            color: white;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #31405F;
+            color: white;
+            margin-top: 20px;
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .product-page {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        let cart = [];
+
+        function addToCart(product) {
+            cart.push(product);
+            updateCart();
+        }
+
+        function updateCart() {
+            let cartList = document.getElementById("cart-items");
+            let totalPrice = document.getElementById("cart-total");
+            cartList.innerHTML = "";
+            let total = 0;
+            cart.forEach(item => {
+                let div = document.createElement("div");
+                div.classList.add("cart-item");
+                div.innerHTML = `${item} - 199 ₽`;
+                cartList.appendChild(div);
+                total += 199;
+            });
+            totalPrice.innerText = `Итого: ${total} ₽`;
+        }
+
+        function openProductPage(productName) {
+            document.getElementById("product-page").style.display = "block";
+            document.getElementById("product-title").innerText = productName;
+            document.getElementById("product-description").innerText = `Описание товара: ${productName} - лучший цифровой продукт!`;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <span>ФайлБери - Магазин цифровых товаров</span>
+        <div class="nav-links">
+            <a href="account.html">Личный кабинет</a>
+            <a href="#cart">Корзина</a>
+            <a href="favorites.html">Избранное</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="product-grid">
+            <div class="product-card" onclick="openProductPage('Таблица расходов и доходов')">Таблица расходов и доходов - 199 ₽</div>
+            <div class="product-card" onclick="openProductPage('Таблица расходов и доходов премиум')">Таблица расходов и доходов премиум - 199 ₽</div>
+            <div class="product-card" onclick="openProductPage('Таблица расходов и организации свадьбы')">Таблица расходов и организации свадьбы - 199 ₽</div>
+            <div class="product-card" onclick="openProductPage('Таблица правильных накоплений')">Таблица правильных накоплений - 199 ₽</div>
+            <div class="product-card" onclick="openProductPage('Таблица трекер привычек')">Таблица трекер привычек - 199 ₽</div>
+            <div class="product-card" onclick="openProductPage('Трекер поставленных целей')">Трекер поставленных целей - 199 ₽</div>
+        </div>
+        <div id="cart" class="cart">
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total" class="cart-total">Итого: 0 ₽</div>
+        </div>
+        <div id="product-page" class="product-page">
+            <h2 id="product-title"></h2>
+            <p id="product-description"></p>
+        </div>
+    </div>
+    <div class="footer">© 2025 ФайлБери. Все права защищены.</div>
+</body>
+</html>
